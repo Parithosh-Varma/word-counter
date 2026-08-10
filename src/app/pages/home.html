@@ -1,0 +1,19 @@
+<section class="card block">
+  <h1 class="title">Word Counter</h1>
+  <p class="subtitle">Count words, characters, sentences and paragraphs — with an estimated reading time.</p>
+
+  <textarea class="field" rows="10" placeholder="Type or paste your text here…" [(ngModel)]="text"></textarea>
+
+  <div class="actions">
+    <label class="toggle"><input type="checkbox" [(ngModel)]="excludeSpaces" /> Exclude spaces</label>
+    <button class="btn" (click)="clear()" type="button">Clear</button>
+  </div>
+</section>
+
+<section class="stats">
+  <div class="card stat"><span class="num">{{ words }}</span><span class="lbl">Words</span></div>
+  <div class="card stat"><span class="num">{{ excludeSpaces ? charsNoSpaces : chars }}</span><span class="lbl">Characters</span></div>
+  <div class="card stat"><span class="num">{{ sentences }}</span><span class="lbl">Sentences</span></div>
+  <div class="card stat"><span class="num">{{ paragraphs }}</span><span class="lbl">Paragraphs</span></div>
+  <div class="card stat"><span class="num">{{ readingMinutes }}</span><span class="lbl">Reading time</span></div>
+</section>
