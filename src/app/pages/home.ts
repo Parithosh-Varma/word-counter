@@ -42,6 +42,16 @@ export class Home {
     return `${min.toFixed(1)}m`;
   }
 
+  get topWords(): Array<{ word: string; count: number }> {
+    const freq = new Map<string, number>();
+    const matches = this.text.toLowerCase().match(/[a-z]{3,}/g) ?? [];
+    for (const w of matches) freq.set(w, (freq.get(w) ?? 0) + 1);
+    return Array.from(freq.entries())
+      .map(([word, count]) => ({ word, count }))
+      .sort((a, b) => b.count - a.count || a.word.localeCompare(b.word))
+      .slice(0, 5);
+  }
+
   clear(): void {
     this.text = '';
   }
