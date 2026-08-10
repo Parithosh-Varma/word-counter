@@ -43,14 +43,19 @@ export class Home {
   }
 
   get topWords(): Array<{ word: string; count: number }> {
+    return this.allWords.slice(0, 5);
+  }
+
+  get allWords(): Array<{ word: string; count: number }> {
     const freq = new Map<string, number>();
     const matches = this.text.toLowerCase().match(/[a-z]{3,}/g) ?? [];
     for (const w of matches) freq.set(w, (freq.get(w) ?? 0) + 1);
     return Array.from(freq.entries())
       .map(([word, count]) => ({ word, count }))
-      .sort((a, b) => b.count - a.count || a.word.localeCompare(b.word))
-      .slice(0, 5);
+      .sort((a, b) => b.count - a.count || a.word.localeCompare(b.word));
   }
+
+  showAll = false;
 
   clear(): void {
     this.text = '';

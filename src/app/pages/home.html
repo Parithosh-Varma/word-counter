@@ -29,5 +29,19 @@
         </span>
       }
     </div>
+
+    @if (showAll) {
+      <div class="word-list full">
+        @for (item of allWords; track item.word) {
+          <span class="word-chip">
+            <b>{{ item.word }}</b>
+            <span class="word-count">{{ item.count }}&#215;</span>
+          </span>
+        }
+      </div>
+    }
+    <button class="btn words-toggle" (click)="showAll = !showAll" type="button">
+      {{ showAll ? 'Show less' : 'Show all words (' + allWords.length + ')' }}
+    </button>
   </section>
 }
