@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 @Component({
@@ -56,6 +56,20 @@ export class Home {
   }
 
   showAll = false;
+
+  @HostListener('document:keydown', ['$event'])
+  handleKeyboardEvent(event: KeyboardEvent): void {
+    // Ctrl/Cmd + K to focus textarea
+    if ((event.ctrlKey || event.metaKey) && event.key === 'k') {
+      event.preventDefault();
+      const textarea = document.querySelector('textarea');
+      if (textarea) textarea.focus();
+    }
+    // Escape to clear
+    if (event.key === 'Escape' && this.text) {
+      this.clear();
+    }
+  }
 
   clear(): void {
     this.text = '';
